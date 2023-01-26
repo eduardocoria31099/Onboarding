@@ -1,4 +1,4 @@
-package com.example.onboarding.utils
+package com.example.utils
 
 import android.app.Activity
 import android.content.Context
@@ -15,6 +15,7 @@ object Utils {
     fun Activity.nextActivity(activity: Activity) {
         Intent(this, activity::class.java).apply {
             startActivity(this)
+            finish()
         }
     }
 

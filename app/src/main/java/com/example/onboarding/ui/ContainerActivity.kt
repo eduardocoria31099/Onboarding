@@ -7,7 +7,7 @@ import com.example.onboarding.ListFragment
 import com.example.onboarding.R
 import com.example.onboarding.ServiceFragment
 import com.example.onboarding.databinding.ActivityContainerBinding
-import com.example.onboarding.utils.Utils.replaceFragment
+import com.example.utils.Utils.replaceFragment
 
 class ContainerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContainerBinding
@@ -15,7 +15,7 @@ class ContainerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityContainerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        replaceFragment(HomeFragment(), R.id.frameLayout)
+        replaceFragment(ListFragment(), R.id.frameLayout)
         showBottomNavigate()
     }
 

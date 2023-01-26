@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.onboarding.RegisterFragment
 import com.example.onboarding.databinding.ActivityLoginBinding
-import com.example.onboarding.utils.Utils.nextActivity
+import com.example.utils.Utils.nextActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

@@ -26,7 +26,20 @@ class RegisterFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        setListeners()
         return binding.root
+    }
+
+
+    private fun setListeners() {
+        binding.apply {
+            topAppBar.setNavigationOnClickListener {
+                dismiss()
+            }
+            btnRegister.setOnClickListener {
+                dismiss()
+            }
+        }
     }
 
     override fun onDestroyView() {
