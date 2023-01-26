@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Material Theme Colors-->
+    <color name="color_primary">#aed581</color>
+    <color name="color_primary_variant">#7da453</color>
+    <color name="color_on_primary">#000000</color>
+
+    <color name="color_secondary">#9fa8da</color>
+    <color name="color_secondary_variant">#6f79a8</color>
+    <color name="color_on_secondary">#000000</color>
+
+
+    <!--Background-->
+    <color name="color_background">#000000</color>
+    <color name="color_on_background">#FFFFFF</color>
+
+    <!--Surface-->
+    <color name="color_surface">#000000</color>
+    <color name="color_on_surface">#FFFFFF</color>
+
+    <!--Error-->
+    <color name="color_error">#ef9a9a</color>
+    <color name="color_on_error">#000000</color>
+</resources>
