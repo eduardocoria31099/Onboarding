@@ -47,7 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginVertical="@dimen/margin_general"
-            android:hint="@string/name">
+            android:hint="@string/name"
+            app:endIconDrawable="@drawable/ic_user"
+            app:endIconMode="custom">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtName"
@@ -62,7 +64,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginVertical="@dimen/margin_general"
-            android:hint="@string/email">
+            android:hint="@string/email"
+            app:endIconDrawable="@drawable/ic_email"
+            app:endIconMode="custom">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtEmail"

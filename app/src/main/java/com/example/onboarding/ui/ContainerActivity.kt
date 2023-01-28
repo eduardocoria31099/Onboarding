@@ -35,8 +35,7 @@ class ContainerActivity : AppCompatActivity() {
                     true
                 }
                 else -> {
-                    replaceFragment(HomeFragment(), R.id.frameLayout)
-                    true
+                    false
                 }
             }
         }
