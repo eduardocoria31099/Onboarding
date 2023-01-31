@@ -31,7 +31,14 @@ class LoginViewModel : ViewModel() {
             password.isEmpty() -> _state.update { it.copy(message = "Password is empty") }
             confirmPassword.isEmpty() -> _state.update { it.copy(message = "Confirm Password is empty") }
             confirmPassword != password -> _state.update { it.copy(message = "Passwords do not match") }
-            else -> createAccount(UserEntity(0, name = name, mail = email, password = password))
+            else -> createAccount(
+                UserEntity(
+                    id = null,
+                    name = name,
+                    mail = email,
+                    password = password
+                )
+            )
         }
         resetMessage()
     }
@@ -72,7 +79,11 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    fun resetMessage() {
+    private fun resetMessage() {
         _state.update { it.copy(message = "") }
+    }
+
+    fun resetValues() {
+        _state.update { it.copy(message = "", dismiss = false) }
     }
 }

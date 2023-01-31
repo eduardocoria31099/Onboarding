@@ -69,7 +69,7 @@ class RegisterFragment : DialogFragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.resetMessage()
+        viewModel.resetValues()
         _binding = null
     }
 }
