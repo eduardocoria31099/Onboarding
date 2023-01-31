@@ -6,8 +6,10 @@ import com.example.onboarding.model.UserEntity
 import com.example.onboarding.repository.LoginRepository
 import com.example.utils.ApiResponseStatus
 import com.example.utils.Utils.isValidEmail
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -18,7 +20,7 @@ class LoginViewModel : ViewModel() {
 
     val state: StateFlow<UiState> get() = _state
 
-    fun validateFields(
+    fun validateFieldsRegister(
         name: String,
         email: String,
         password: String,
@@ -50,7 +52,6 @@ class LoginViewModel : ViewModel() {
                 is ApiResponseStatus.Loading -> {
                     _state.update {
                         it.copy(
-                            loading = true,
                             message = "",
                             dismiss = false,
                         )
@@ -59,7 +60,6 @@ class LoginViewModel : ViewModel() {
                 is ApiResponseStatus.Success -> {
                     _state.update {
                         it.copy(
-                            loading = false,
                             message = "Account created successfully",
                             dismiss = true,
                         )
@@ -68,9 +68,56 @@ class LoginViewModel : ViewModel() {
                 is ApiResponseStatus.Error -> {
                     _state.update {
                         it.copy(
-                            loading = true,
-                            message = "",
+                            message = response.message,
                             dismiss = false,
+                        )
+                    }
+                }
+            }
+            resetMessage()
+        }
+    }
+
+    fun validateFieldsLogin(
+        email: String,
+        password: String,
+    ) {
+        when {
+            email.isEmpty() -> _state.update { it.copy(message = "email is empty") }
+            password.isEmpty() -> _state.update { it.copy(message = "password is empty") }
+            else -> readUser(email, password)
+        }
+        resetMessage()
+    }
+
+    private fun readUser(
+        mail: String,
+        password: String
+    ) = viewModelScope.launch {
+        repository.readUser(mail, password).flowOn(Dispatchers.IO).collect { response ->
+            when (response) {
+                is ApiResponseStatus.Loading -> {
+                    _state.update {
+                        it.copy(
+                            nextActivity = false,
+                        )
+                    }
+                }
+                is ApiResponseStatus.Success -> {
+                    response.data?.let { user ->
+                        _state.update {
+                            it.copy(
+                                userEntity = user,
+                                nextActivity = true
+                            )
+                        }
+                    }
+                }
+                is ApiResponseStatus.Error -> {
+                    _state.update {
+                        it.copy(
+                            message = response.message,
+                            nextActivity = false,
                         )
                     }
                 }
@@ -84,6 +131,6 @@ class LoginViewModel : ViewModel() {
     }
 
     fun resetValues() {
-        _state.update { it.copy(message = "", dismiss = false) }
+        _state.update { it.copy(message = "", dismiss = false, nextActivity = false) }
     }
 }

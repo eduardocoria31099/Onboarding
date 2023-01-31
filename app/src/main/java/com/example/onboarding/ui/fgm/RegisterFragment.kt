@@ -56,7 +56,7 @@ class RegisterFragment : DialogFragment() {
                 dismiss()
             }
             btnRegister.setOnClickListener {
-                viewModel.validateFields(
+                viewModel.validateFieldsRegister(
                     name = txtName.text.toString(),
                     email = txtEmail.text.toString(),
                     password = txtPassword.text.toString(),
