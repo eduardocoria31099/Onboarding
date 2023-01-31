@@ -1,4 +1,4 @@
-package com.example.onboarding
+package com.example.onboarding.ui.fgm
 
 import android.os.Bundle
 import android.view.LayoutInflater

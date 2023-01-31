@@ -8,7 +8,15 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import java.util.regex.Pattern
+
 
 object Utils {
 
@@ -52,7 +60,7 @@ object Utils {
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    fun Context.materialAlertDialogBuilder(title: Int, message: Int) {
+    fun Context.materialAlertDialog(title: String, message: String) {
         MaterialAlertDialogBuilder(this)
             .setTitle(title)
             .setMessage(message)
@@ -65,6 +73,29 @@ object Utils {
         supportFragmentManager.beginTransaction().apply {
             replace(frameId, fragment)
             commit()
+        }
+    }
+
+    fun isValidEmail(email: CharSequence): Boolean {
+        val emailPattern = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
+        )
+        return emailPattern.matcher(email).matches()
+    }
+
+    fun <T> LifecycleOwner.collect(flow: Flow<T>, action: suspend (T) -> Unit) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                flow.collect {
+                    action.invoke(it)
+                }
+            }
         }
     }
 }

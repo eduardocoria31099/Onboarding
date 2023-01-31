@@ -1,4 +1,4 @@
-package com.example.onboarding.ui
+package com.example.onboarding.ui.act
 
 import android.os.Bundle
 import android.os.Handler

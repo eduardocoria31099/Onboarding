@@ -1,8 +1,8 @@
-package com.example.onboarding.ui
+package com.example.onboarding.ui.act
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.onboarding.RegisterFragment
+import com.example.onboarding.ui.fgm.RegisterFragment
 import com.example.onboarding.databinding.ActivityLoginBinding
 import com.example.utils.Utils.nextActivity
 
