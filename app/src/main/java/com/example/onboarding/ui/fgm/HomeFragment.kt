@@ -17,8 +17,15 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        setListeners()
         return binding.root
     }
+
+    private fun setListeners() {
+        binding.apply {
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

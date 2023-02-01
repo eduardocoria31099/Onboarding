@@ -8,4 +8,5 @@ data class UiState(
     val dismiss: Boolean = false,
     val userEntity: UserEntity = UserEntity(id = null, name = "", mail = "", password = ""),
     val nextActivity: Boolean = false,
+    val vip: Boolean = false,
 )

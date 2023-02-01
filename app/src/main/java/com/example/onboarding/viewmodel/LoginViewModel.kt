@@ -1,7 +1,12 @@
 package com.example.onboarding.viewmodel
 
+import android.annotation.SuppressLint
+import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.onboarding.App.Companion.datastore
 import com.example.onboarding.model.UserEntity
 import com.example.onboarding.repository.LoginRepository
 import com.example.utils.ApiResponseStatus
@@ -13,7 +18,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context) : ViewModel() {
 
     private var repository = LoginRepository()
     private val _state = MutableStateFlow(UiState())
@@ -104,6 +109,9 @@ class LoginViewModel : ViewModel() {
                     }
                 }
                 is ApiResponseStatus.Success -> {
+                    context.datastore.edit {
+                        it[booleanPreferencesKey("vip")] = true
+                    }
                     response.data?.let { user ->
                         _state.update {
                             it.copy(

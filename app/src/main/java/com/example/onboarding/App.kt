@@ -1,6 +1,8 @@
 package com.example.onboarding
 
 import android.app.Application
+import android.content.Context
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
 import com.example.onboarding.data.database.AppDatabase
 import com.example.utils.Constants
@@ -9,6 +11,7 @@ class App : Application() {
 
     companion object {
         lateinit var database: AppDatabase
+        val Context.datastore by preferencesDataStore(name = "LOGIN_PREFERENCES")
     }
 
     override fun onCreate() {

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.onboarding.R
 import com.example.onboarding.databinding.FragmentServiceBinding
 
 class ServiceFragment : Fragment() {
@@ -24,22 +23,9 @@ class ServiceFragment : Fragment() {
 
     private fun setListeners() {
         binding.apply {
-            showTopBar()
         }
     }
 
-    private fun showTopBar() {
-        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.item_1 -> {
-                    binding.txtCharacter.requestFocus()
-                    true
-                }
-                else -> false
-            }
-        }
-
-    }
 
     override fun onDestroy() {
         super.onDestroy()
