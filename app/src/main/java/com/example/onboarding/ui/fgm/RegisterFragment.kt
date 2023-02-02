@@ -9,8 +9,8 @@ import androidx.fragment.app.activityViewModels
 import com.example.onboarding.R
 import com.example.onboarding.databinding.FragmentRegisterBinding
 import com.example.onboarding.viewmodel.LoginViewModel
-import com.example.utils.Utils.collect
-import com.example.utils.Utils.materialAlertDialog
+import com.example.utils.ExtendedFunctions.collect
+import com.example.utils.ExtendedFunctions.materialAlertDialog
 
 
 class RegisterFragment : DialogFragment() {
@@ -66,10 +66,15 @@ class RegisterFragment : DialogFragment() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.resetValues()
+
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.resetValues()
         _binding = null
     }
 }

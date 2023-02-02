@@ -11,11 +11,12 @@ import com.example.onboarding.databinding.ActivityContainerBinding
 import com.example.onboarding.ui.fgm.HomeFragment
 import com.example.onboarding.ui.fgm.ListFragment
 import com.example.onboarding.ui.fgm.ServiceFragment
-import com.example.utils.Utils.nextActivity
-import com.example.utils.Utils.replaceFragment
+import com.example.utils.ExtendedFunctions.nextActivity
+import com.example.utils.ExtendedFunctions.replaceFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@Suppress("DEPRECATION")
 class ContainerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContainerBinding
     override fun onCreate(savedInstanceState: Bundle?) {

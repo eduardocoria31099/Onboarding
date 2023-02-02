@@ -22,7 +22,6 @@ class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context
 
     private var repository = LoginRepository()
     private val _state = MutableStateFlow(UiState())
-
     val state: StateFlow<UiState> get() = _state
 
     fun validateFieldsRegister(
@@ -36,6 +35,8 @@ class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context
             email.isEmpty() -> _state.update { it.copy(message = "Email is empty") }
             !isValidEmail(email) -> _state.update { it.copy(message = "it is not a valid email") }
             password.isEmpty() -> _state.update { it.copy(message = "Password is empty") }
+            password.length < 5 -> _state.update { it.copy(message = "Very short password,minimum 5 characters") }
+            password.length > 10 -> _state.update { it.copy(message = "Very long password,maximum 10 characters") }
             confirmPassword.isEmpty() -> _state.update { it.copy(message = "Confirm Password is empty") }
             confirmPassword != password -> _state.update { it.copy(message = "Passwords do not match") }
             else -> createAccount(
@@ -57,7 +58,6 @@ class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context
                 is ApiResponseStatus.Loading -> {
                     _state.update {
                         it.copy(
-                            message = "",
                             dismiss = false,
                         )
                     }
@@ -89,13 +89,16 @@ class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context
     ) {
         when {
             email.isEmpty() -> _state.update { it.copy(message = "email is empty") }
-            password.isEmpty() -> _state.update { it.copy(message = "password is empty") }
-            else -> readUser(email, password)
+            !isValidEmail(email) -> _state.update { it.copy(message = "it is not a valid email") }
+            password.isEmpty() -> _state.update { it.copy(message = "Password is empty") }
+            password.length < 5 -> _state.update { it.copy(message = "Very short password,minimum 5 characters") }
+            password.length > 10 -> _state.update { it.copy(message = "Very long password,maximum 10 characters") }
+            else -> login(email, password)
         }
         resetMessage()
     }
 
-    private fun readUser(
+    private fun login(
         mail: String,
         password: String
     ) = viewModelScope.launch {
@@ -133,6 +136,7 @@ class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context
             resetMessage()
         }
     }
+
 
     private fun resetMessage() {
         _state.update { it.copy(message = "") }
