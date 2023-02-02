@@ -1,5 +1,7 @@
 package com.example.utils
 
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
 
@@ -16,5 +18,15 @@ object Utils {
                     ")+"
         )
         return emailPattern.matcher(email).matches()
+    }
+
+    fun convertLongToTime(time: Long): String {
+        val date = Date(time)
+        date.minutes = date.minutes + 480
+        val format = SimpleDateFormat(
+            "yyyy-MM-dd",
+            Locale.getDefault()
+        )
+        return format.format(date)
     }
 }

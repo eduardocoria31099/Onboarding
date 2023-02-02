@@ -19,4 +19,7 @@
     <string name="list_peoples">List Peoples</string>
     <string name="list_character">List Character</string>
     <string name="search">Search</string>
+    <string name="no_people_registered">No people registered</string>
+    <string name="list">List</string>
+    <string name="service">Service</string>
 </resources>

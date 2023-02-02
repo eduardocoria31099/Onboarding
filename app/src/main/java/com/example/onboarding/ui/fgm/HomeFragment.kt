@@ -15,12 +15,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.onboarding.R
 import com.example.onboarding.databinding.FragmentHomeBinding
 import com.example.onboarding.model.PersonEntity
 import com.example.onboarding.viewmodel.ContainerViewModel
 import com.example.utils.Constants.REQUEST_IMAGE_CAPTURE
 import com.example.utils.ExtendedFunctions.bitmapToString
 import com.example.utils.ExtendedFunctions.collect
+import com.example.utils.Utils.convertLongToTime
+import com.google.android.material.datepicker.MaterialDatePicker
 
 @Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
@@ -31,6 +34,8 @@ class HomeFragment : Fragment() {
     private val viewModel: ContainerViewModel by activityViewModels()
 
     private var encoded = ""
+    private var dateNew: Long = 0
+    private val date = System.currentTimeMillis()
 
 
     override fun onCreateView(
@@ -57,6 +62,9 @@ class HomeFragment : Fragment() {
             btnTakePicture.setOnClickListener {
                 validateCameraPermission()
             }
+            txtBirthdayDay.setOnClickListener {
+                showDatePicker()
+            }
             btnAddPeople.setOnClickListener {
                 viewModel.savePerson(
                     PersonEntity(
@@ -69,6 +77,7 @@ class HomeFragment : Fragment() {
                         txtHobbies.text.toString(),
                     )
                 )
+                clearData()
             }
             txtName.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
@@ -168,6 +177,17 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun clearData() {
+        binding.apply {
+            imgPerson.setImageResource(R.drawable.empty_picture)
+            txtName.setText("")
+            txtBirthdayDay.setText("")
+            txtAddress.setText("")
+            txtPhoneNumber.setText("")
+            txtHobbies.setText("")
+        }
+    }
+
     private fun validateCameraPermission() {
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
@@ -198,6 +218,22 @@ class HomeFragment : Fragment() {
         }
         validate()
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun showDatePicker() {
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select Date")
+                .setSelection(date)
+                .build()
+        datePicker.addOnPositiveButtonClickListener {
+            dateNew = it
+            binding.txtBirthdayDay.setText(convertLongToTime(dateNew))
+        }
+        datePicker.addOnNegativeButtonClickListener {}
+        datePicker.addOnCancelListener {}
+        datePicker.addOnDismissListener {}
+        datePicker.show(childFragmentManager, "TAG")
     }
 
     private fun validate() {

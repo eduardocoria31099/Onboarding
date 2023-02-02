@@ -18,6 +18,17 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Total: 6 peoples" />
 
+    <include
+        android:id="@+id/emptyState"
+        layout="@layout/empty_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
