@@ -21,4 +21,8 @@
     <!--Error-->
     <color name="color_error">#ef9a9a</color>
     <color name="color_on_error">#000000</color>
+
+    <!--Extra colors-->
+    <color name="color_delete">#C70000</color>
+    <color name="color_update">#3386FF</color>
 </resources>

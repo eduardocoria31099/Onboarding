@@ -35,6 +35,7 @@ class PersonAdapter(
         private val binding = ItemListPeopleBinding.bind(view)
         fun bind(person: PersonEntity) = with(binding) {
             tvName.text = person.name
+
             tvAge.text = person.birthday
             val imageBytes = Base64.decode(person.img, 0)
             val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
