@@ -54,6 +54,19 @@ class ContainerViewModel : ViewModel() {
         }
     }
 
+    fun deletePerson(personEntity: PersonEntity) = viewModelScope.launch {
+        repository.deletePerson(personEntity).collect { response ->
+            when (response) {
+                is ApiResponseStatus.Loading -> {}
+                is ApiResponseStatus.Success -> {
+                    _state.update { it.copy(message = "Person deleted successful") }
+                }
+                is ApiResponseStatus.Error -> {}
+            }
+            resetMessage()
+        }
+    }
+
     fun resetMessage() {
         _state.update { it.copy(message = "") }
     }

@@ -1,6 +1,7 @@
 package com.example.onboarding.data.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.onboarding.model.PersonEntity
@@ -14,4 +15,7 @@ interface PersonDao {
 
     @Query("SELECT * FROM person_table")
     fun getAll(): Flow<List<PersonEntity>>
+
+    @Delete
+    fun delete(personEntity: PersonEntity)
 }

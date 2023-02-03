@@ -32,7 +32,6 @@ class PersonAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
         holder.bind(person[position])
 
-
     class ViewHolder(
         view: View,
         private val onClick: (PersonEntity) -> Unit,
@@ -57,5 +56,7 @@ class PersonAdapter(
         notifyDataSetChanged()
     }
 
+    fun getPerson(position: Int): PersonEntity {
+        return person[position]
+    }
 }
-

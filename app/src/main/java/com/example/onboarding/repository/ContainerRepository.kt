@@ -22,4 +22,13 @@ class ContainerRepository {
     fun getAll(): Flow<List<PersonEntity>> {
         return App.database.personDao().getAll()
     }
+
+    fun deletePerson(personEntity: PersonEntity) = flow {
+        emit(ApiResponseStatus.Loading())
+        try {
+            emit(ApiResponseStatus.Success(App.database.personDao().delete(personEntity)))
+        } catch (ex: Exception) {
+            emit(ApiResponseStatus.Error(ex.message ?: ""))
+        }
+    }.flowOn(Dispatchers.IO)
 }
