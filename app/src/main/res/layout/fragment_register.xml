@@ -48,6 +48,8 @@
             android:layout_gravity="center"
             android:layout_marginVertical="@dimen/margin_general"
             android:hint="@string/name"
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
             app:endIconDrawable="@drawable/ic_user"
             app:endIconMode="custom">
 
@@ -56,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="10"
+                android:inputType="textPersonName"
                 android:maxLines="1"
                 android:textSize="14sp" />
 
@@ -76,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
+                android:inputType="textEmailAddress"
                 android:textSize="14sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

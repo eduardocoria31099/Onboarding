@@ -22,5 +22,4 @@ class CharacterRepository {
             emit(ApiResponseStatus.Error(ex.message ?: ""))
         }
     }.flowOn(Dispatchers.IO)
-
 }

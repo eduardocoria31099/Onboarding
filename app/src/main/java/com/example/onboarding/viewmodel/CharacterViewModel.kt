@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CharacterViewModel : ViewModel() {
+
     private var repository = CharacterRepository()
 
     private val _state = MutableStateFlow(UiState())
@@ -28,7 +29,7 @@ class CharacterViewModel : ViewModel() {
                         )
                     }
                 }
-                is ApiResponseStatus.Error -> response.message?.let { message ->
+                is ApiResponseStatus.Error -> response.message.let { message ->
                     _state.update {
                         it.copy(loading = false, message = message)
                     }

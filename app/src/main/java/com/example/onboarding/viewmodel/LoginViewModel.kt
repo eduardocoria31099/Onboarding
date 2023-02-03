@@ -1,24 +1,24 @@
 package com.example.onboarding.viewmodel
 
 import android.annotation.SuppressLint
-import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.onboarding.App.Companion.datastore
 import com.example.onboarding.model.UserEntity
 import com.example.onboarding.repository.LoginRepository
 import com.example.utils.ApiResponseStatus
 import com.example.utils.Utils.isValidEmail
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context) : ViewModel() {
+class LoginViewModel(
+    @field:SuppressLint("StaticFieldLeak") val dataStore: DataStore<Preferences>
+) : ViewModel() {
 
     private var repository = LoginRepository()
     private val _state = MutableStateFlow(UiState())
@@ -44,13 +44,12 @@ class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context
                     id = null,
                     name = name,
                     mail = email,
-                    password = password
+                    password = password,
                 )
             )
         }
         resetMessage()
     }
-
 
     private fun createAccount(userEntity: UserEntity) = viewModelScope.launch {
         repository.createAccount(userEntity).collect { response ->
@@ -102,7 +101,7 @@ class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context
         mail: String,
         password: String
     ) = viewModelScope.launch {
-        repository.readUser(mail, password).flowOn(Dispatchers.IO).collect { response ->
+        repository.readUser(mail, password).collect { response ->
             when (response) {
                 is ApiResponseStatus.Loading -> {
                     _state.update {
@@ -112,15 +111,19 @@ class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context
                     }
                 }
                 is ApiResponseStatus.Success -> {
-                    context.datastore.edit {
+                    dataStore.edit {
                         it[booleanPreferencesKey("vip")] = true
                     }
-                    response.data?.let { user ->
-                        _state.update {
-                            it.copy(
-                                userEntity = user,
-                                nextActivity = true
-                            )
+                    response.data.let { user ->
+                        if (user == null) {
+                            _state.update { it.copy(message = "Email or password incorrect") }
+                        } else {
+                            _state.update {
+                                it.copy(
+                                    user = user,
+                                    nextActivity = true,
+                                )
+                            }
                         }
                     }
                 }
@@ -136,7 +139,6 @@ class LoginViewModel(@field:SuppressLint("StaticFieldLeak") val context: Context
             resetMessage()
         }
     }
-
 
     private fun resetMessage() {
         _state.update { it.copy(message = "") }

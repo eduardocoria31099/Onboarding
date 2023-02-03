@@ -9,12 +9,13 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onboarding.databinding.FragmentServiceBinding
 import com.example.onboarding.domain.Result
 import com.example.onboarding.ui.adapter.CharacterAdapter
 import com.example.onboarding.viewmodel.CharacterViewModel
 import com.example.utils.ExtendedFunctions.collect
+import com.example.utils.ExtendedFunctions.gone
+import com.example.utils.ExtendedFunctions.show
 import com.example.utils.ExtendedFunctions.toast
 import kotlinx.coroutines.launch
 
@@ -27,15 +28,12 @@ class ServiceFragment : Fragment() {
     private lateinit var characterAdapter: CharacterAdapter
     private lateinit var listCharacter: List<Result>
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentServiceBinding.inflate(inflater, container, false)
         init()
-        setFlows()
-        setListeners()
         return binding.root
     }
 
@@ -43,18 +41,20 @@ class ServiceFragment : Fragment() {
         setAdapter()
         setRecycler()
         viewModel.getCharacter()
+        setFlows()
+        setListeners()
     }
 
     @SuppressLint("SetTextI18n")
     private fun setFlows() {
         collect(viewModel.state) {
+
             if (it.loading) {
-                binding.pbLoading.visibility = View.VISIBLE
+                binding.pbLoading.show()
             } else {
-                binding.pbLoading.visibility = View.GONE
+                binding.pbLoading.gone()
                 characterAdapter.addList(it.character)
-                val count = characterAdapter.itemCount
-                binding.tvNumberPeople.text = "Total $count person"
+                binding.tvNumberPeople.text = "Total ${characterAdapter.itemCount} person"
             }
 
             it.character.let { character ->
@@ -72,7 +72,6 @@ class ServiceFragment : Fragment() {
     private fun setRecycler() = with(binding) {
         recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext())
             adapter = characterAdapter
         }
     }
@@ -85,18 +84,14 @@ class ServiceFragment : Fragment() {
                     character.name!!.lowercase().contains(it.toString().lowercase())
                 }
                 characterAdapter.updateList(newLis)
-                val count = characterAdapter.itemCount
-                binding.tvNumberPeople.text = "Total $count person"
+                tvNumberPeople.text = "Total ${characterAdapter.itemCount} person"
             }
-            val count = characterAdapter.itemCount
-            binding.tvNumberPeople.text = "Total $count person"
+            tvNumberPeople.text = "Total ${characterAdapter.itemCount} person"
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-
 }

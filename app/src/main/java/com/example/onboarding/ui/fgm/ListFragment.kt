@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onboarding.databinding.FragmentListBinding
 import com.example.onboarding.model.PersonEntity
@@ -30,10 +29,6 @@ class ListFragment : Fragment() {
     private val viewModel: ContainerViewModel by activityViewModels()
 
     private lateinit var listPerson: List<PersonEntity>
-    private var person = PersonEntity(null, "", "", "", "", "", "")
-
-    private lateinit var dialogPerson: DialogPerson
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,9 +36,14 @@ class ListFragment : Fragment() {
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
         init()
+        return binding.root
+    }
+
+    private fun init() {
+        setAdapter()
+        setRecycler()
         setFlows()
         setListeners()
-        return binding.root
     }
 
     @SuppressLint("SetTextI18n")
@@ -73,11 +73,6 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun init() {
-        setAdapter()
-        setRecycler()
-    }
-
     private fun setAdapter() {
 
         val swipeGesture = object : SwipeGesture(requireContext()) {
@@ -96,14 +91,14 @@ class ListFragment : Fragment() {
         }
         val touchHelper = ItemTouchHelper(swipeGesture)
         touchHelper.attachToRecyclerView(binding.recyclerView)
-        personAdapter = PersonAdapter(emptyList()) {
-            person = it
-            dialogPerson = DialogPerson(requireContext(), person)
-            showDialogPerson()
+
+        personAdapter = PersonAdapter(emptyList()) { person ->
+            showDialogPerson(person)
         }
     }
 
-    private fun showDialogPerson() {
+    private fun showDialogPerson(person: PersonEntity) {
+        val dialogPerson = DialogPerson(requireContext(), person)
         dialogPerson.setOnOptionSelectedListener(object : DialogPerson.OnOptionSelectedListener {
             override fun onCancelOptionSelected() {
                 dialogPerson.hide()
@@ -115,7 +110,6 @@ class ListFragment : Fragment() {
     private fun setRecycler() = with(binding) {
         recyclerView.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext())
             adapter = personAdapter
         }
     }
@@ -124,6 +118,4 @@ class ListFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
-
 }

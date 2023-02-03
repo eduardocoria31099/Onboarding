@@ -32,7 +32,11 @@ class CharacterAdapter(
         private val binding = ItemCharacterBinding.bind(view)
         fun bind(character: Result) = with(binding) {
             tvName.text = character.name
-            Picasso.get().load(character.image).into(imgCharacter)
+            Picasso.get()
+                .load(character.image)
+                .placeholder(R.drawable.ic_camera)
+                .error(R.drawable.ic_camera)
+                .into(imgCharacter)
             itemView.setOnClickListener { onClick(character) }
         }
     }

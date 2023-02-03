@@ -61,8 +61,11 @@ object ExtendedFunctions {
     }
 
     fun Context.materialAlertDialog(title: String, message: String) {
-        MaterialAlertDialogBuilder(this).setTitle(title).setMessage(message)
-            .setPositiveButton("accept", null).setCancelable(false).show()
+        MaterialAlertDialogBuilder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton("accept", null).setCancelable(false)
+            .show()
     }
 
     fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {

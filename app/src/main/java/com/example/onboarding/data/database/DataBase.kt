@@ -11,6 +11,7 @@ import com.example.onboarding.model.UserEntity
     entities = [UserEntity::class,PersonEntity::class],
     version = 2
 )
+
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun personDao(): PersonDao

@@ -1,13 +1,13 @@
 package com.example.onboarding.viewmodel
 
 import com.example.onboarding.domain.Result
-import com.example.onboarding.model.UserEntity
+import com.example.onboarding.domain.User
 
 data class UiState(
     val loading: Boolean = false,
     val message: String = "",
     val dismiss: Boolean = false,
-    val userEntity: UserEntity = UserEntity(id = null, name = "", mail = "", password = ""),
+    val user: User = User(id = null, name = "", mail = "", password = ""),
     val nextActivity: Boolean = false,
     val vip: Boolean = false,
     val visibility: Boolean = false,

@@ -10,13 +10,10 @@ import com.example.onboarding.R
 import com.example.onboarding.databinding.FragmentRegisterBinding
 import com.example.onboarding.viewmodel.LoginViewModel
 import com.example.utils.ExtendedFunctions.collect
-import com.example.utils.ExtendedFunctions.materialAlertDialog
-
 
 class RegisterFragment : DialogFragment() {
 
     private val viewModel: LoginViewModel by activityViewModels()
-
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
@@ -41,10 +38,8 @@ class RegisterFragment : DialogFragment() {
 
     private fun setFlows() {
         collect(viewModel.state) {
-            if (it.message.isNotEmpty()) {
-                requireContext().materialAlertDialog(title = "Message", message = it.message)
-            }
             if (it.dismiss) {
+                cleanView()
                 dismiss()
             }
         }
@@ -53,6 +48,7 @@ class RegisterFragment : DialogFragment() {
     private fun setListeners() {
         binding.apply {
             topAppBar.setNavigationOnClickListener {
+                cleanView()
                 dismiss()
             }
             btnRegister.setOnClickListener {
@@ -66,11 +62,16 @@ class RegisterFragment : DialogFragment() {
         }
     }
 
+    private fun cleanView() = with(binding) {
+        txtName.setText("")
+        txtEmail.setText("")
+        txtPassword.setText("")
+        txtConfirmPassword.setText("")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         viewModel.resetValues()
-
-
     }
 
     override fun onDestroyView() {

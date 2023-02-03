@@ -22,4 +22,5 @@
     <string name="no_people_registered">No people registered</string>
     <string name="list">List</string>
     <string name="service">Service</string>
+    <string name="message">Message</string>
 </resources>
