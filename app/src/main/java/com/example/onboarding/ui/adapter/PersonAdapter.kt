@@ -39,11 +39,11 @@ class PersonAdapter(
     ) : RecyclerView.ViewHolder(view) {
         private val binding = ItemListPeopleBinding.bind(view)
 
-        @SuppressLint("SimpleDateFormat")
+        @SuppressLint("SimpleDateFormat", "SetTextI18n")
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(person: PersonEntity) = with(binding) {
             tvName.text = person.name
-            tvAge.text = birthday(person.birthday ?: "").toString()
+            tvAge.text = birthday(person.birthday ?: "").toString() + " years"
             val imageBytes = Base64.decode(person.img, 0)
             val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
             imgPeople.setImageBitmap(image)

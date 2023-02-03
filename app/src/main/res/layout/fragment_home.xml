@@ -9,6 +9,7 @@
 
     <ScrollView
 
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/margin_general"
@@ -145,9 +146,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddPeople"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_general"
+        android:layout_margin="32dp"
         android:text="@string/add_people"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

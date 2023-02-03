@@ -32,7 +32,7 @@ class DialogPerson(context: Context, personEntity: PersonEntity) {
     private fun setListeners() {
         binding.apply {
             tvName.text = person.name
-            tvAge.text = birthday(person.birthday ?: "").toString()
+            tvAge.text = birthday(person.birthday ?: "").toString() + " years"
             tvAddress.text = person.address
             tvNumber.text = person.number
             if (person.hobbies!!.isEmpty()) {
