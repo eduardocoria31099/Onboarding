@@ -1,5 +1,6 @@
 package com.example.utils
 
+import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
@@ -28,5 +29,17 @@ object Utils {
             Locale.getDefault()
         )
         return format.format(date)
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun birthday(date: String): Long {
+        val dateBirthday: Date? = SimpleDateFormat("yyyy-MM-dd").parse(date)
+        val dayActual = Date(System.currentTimeMillis())
+        val differences = dayActual.time - dateBirthday!!.time
+        val seconds = differences / 1000
+        val minutes = seconds / 60
+        val horas = minutes / 60
+        val dias = horas / 24
+        return dias / 365
     }
 }

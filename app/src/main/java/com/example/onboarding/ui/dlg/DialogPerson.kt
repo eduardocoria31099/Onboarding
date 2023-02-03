@@ -6,8 +6,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import com.example.onboarding.databinding.DialogPersonBinding
 import com.example.onboarding.model.PersonEntity
-import java.text.SimpleDateFormat
-import java.util.*
+import com.example.utils.Utils.birthday
 
 class DialogPerson(context: Context, personEntity: PersonEntity) {
     private var binding: DialogPersonBinding
@@ -33,15 +32,7 @@ class DialogPerson(context: Context, personEntity: PersonEntity) {
     private fun setListeners() {
         binding.apply {
             tvName.text = person.name
-            val dateBirthday: Date? = SimpleDateFormat("yyyy-MM-dd").parse(person.birthday ?: "")
-            val dayActual = Date(System.currentTimeMillis())
-            val differences = dayActual.time - dateBirthday!!.time
-            val seconds = differences / 1000
-            val minutes = seconds / 60
-            val horas = minutes / 60
-            val dias = horas / 24
-            val years = dias / 365
-            tvAge.text = years.toString()
+            tvAge.text = birthday(person.birthday ?: "").toString()
             tvAddress.text = person.address
             tvNumber.text = person.number
             if (person.hobbies!!.isEmpty()) {

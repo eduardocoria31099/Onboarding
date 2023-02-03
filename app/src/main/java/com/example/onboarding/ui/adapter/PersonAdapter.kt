@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.onboarding.R
 import com.example.onboarding.databinding.ItemListPeopleBinding
 import com.example.onboarding.model.PersonEntity
-import java.text.SimpleDateFormat
+import com.example.utils.Utils.birthday
 import java.util.*
 
 class PersonAdapter(
@@ -43,17 +43,7 @@ class PersonAdapter(
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(person: PersonEntity) = with(binding) {
             tvName.text = person.name
-
-            val dateBirthday: Date? = SimpleDateFormat("yyyy-MM-dd").parse(person.birthday ?: "")
-            val dayActual = Date(System.currentTimeMillis())
-            val differences = dayActual.time - dateBirthday!!.time
-            val seconds = differences / 1000
-            val minutes = seconds / 60
-            val horas = minutes / 60
-            val dias = horas / 24
-            val years = dias / 365
-
-            tvAge.text = years.toString()
+            tvAge.text = birthday(person.birthday ?: "").toString()
             val imageBytes = Base64.decode(person.img, 0)
             val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
             imgPeople.setImageBitmap(image)
