@@ -76,10 +76,10 @@ object ExtendedFunctions {
         MaterialAlertDialogBuilder(this)
             .setTitle(title)
             .setMessage(message)
-            .setNegativeButton("Cancelar") { dialog, which ->
+            .setNegativeButton("Cancelar") { _, _ ->
                 onClickDialog.clickCancel()
             }
-            .setPositiveButton("Aceptar") { dialog, which ->
+            .setPositiveButton("Aceptar") { _, _ ->
                 onClickDialog.clickAccept()
             }
             .setCancelable(true)
