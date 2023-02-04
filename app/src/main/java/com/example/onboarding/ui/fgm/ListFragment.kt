@@ -15,13 +15,13 @@ import com.example.onboarding.model.PersonEntity
 import com.example.onboarding.ui.adapter.PersonAdapter
 import com.example.onboarding.ui.adapter.SwipeGesture
 import com.example.onboarding.ui.dlg.DialogPerson
+import com.example.onboarding.ui.dlg.DialogPersonUpdate
 import com.example.onboarding.viewmodel.ContainerViewModel
 import com.example.utils.ExtendedFunctions
 import com.example.utils.ExtendedFunctions.collect
 import com.example.utils.ExtendedFunctions.gone
 import com.example.utils.ExtendedFunctions.materialAlertDialogWhitClick
 import com.example.utils.ExtendedFunctions.show
-import com.example.utils.ExtendedFunctions.toast
 import kotlinx.coroutines.launch
 
 @Suppress("DEPRECATION")
@@ -98,7 +98,8 @@ class ListFragment : Fragment() {
                             })
                     }
                     ItemTouchHelper.RIGHT -> {
-                        requireContext().toast("RIGHT")
+                        val person = personAdapter.getPerson(viewHolder.position)
+                        showDialogPersonUpdate(person)
                     }
                 }
             }
@@ -109,6 +110,20 @@ class ListFragment : Fragment() {
         personAdapter = PersonAdapter(emptyList()) { person ->
             showDialogPerson(person)
         }
+    }
+
+    private fun showDialogPersonUpdate(person: PersonEntity) {
+
+        val dialogPersonUpdate = DialogPersonUpdate(requireContext(), person)
+        dialogPersonUpdate.setOnOptionSelectedListener(object :
+            DialogPersonUpdate.OnOptionSelectedListener {
+            override fun onCancel() {
+                dialogPersonUpdate.hide()
+            }
+            override fun onUpdatePerson() {
+            }
+        })
+        dialogPersonUpdate.show()
     }
 
     private fun showDialogPerson(person: PersonEntity) {
