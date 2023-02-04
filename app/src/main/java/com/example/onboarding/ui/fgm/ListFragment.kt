@@ -16,12 +16,15 @@ import com.example.onboarding.ui.adapter.PersonAdapter
 import com.example.onboarding.ui.adapter.SwipeGesture
 import com.example.onboarding.ui.dlg.DialogPerson
 import com.example.onboarding.viewmodel.ContainerViewModel
+import com.example.utils.ExtendedFunctions
 import com.example.utils.ExtendedFunctions.collect
 import com.example.utils.ExtendedFunctions.gone
+import com.example.utils.ExtendedFunctions.materialAlertDialogWhitClick
 import com.example.utils.ExtendedFunctions.show
 import com.example.utils.ExtendedFunctions.toast
 import kotlinx.coroutines.launch
 
+@Suppress("DEPRECATION")
 class ListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
@@ -29,6 +32,8 @@ class ListFragment : Fragment() {
 
     private lateinit var personAdapter: PersonAdapter
     private val viewModel: ContainerViewModel by activityViewModels()
+
+    private lateinit var listPerson: List<PersonEntity>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +61,7 @@ class ListFragment : Fragment() {
 
     private fun setFlows() = lifecycleScope.launch {
         collect(viewModel.inventory) {
+            listPerson = it
             personAdapter.addAll(it)
             validateCont()
         }
@@ -77,8 +83,19 @@ class ListFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 when (direction) {
                     ItemTouchHelper.LEFT -> {
-                        val person = personAdapter.getPerson(viewHolder.position)
-                        viewModel.deletePerson(person)
+                        requireContext().materialAlertDialogWhitClick(
+                            "Message",
+                            "¿Do you want to delete the person?",
+                            object : ExtendedFunctions.OnClickDialog {
+                                override fun clickAccept() {
+                                    val person = personAdapter.getPerson(viewHolder.position)
+                                    viewModel.deletePerson(person)
+                                }
+
+                                override fun clickCancel() {
+                                    personAdapter.addAll(listPerson)
+                                }
+                            })
                     }
                     ItemTouchHelper.RIGHT -> {
                         requireContext().toast("RIGHT")

@@ -68,6 +68,29 @@ object ExtendedFunctions {
             .show()
     }
 
+    fun Context.materialAlertDialogWhitClick(
+        title: String,
+        message: String,
+        onClickDialog: OnClickDialog
+    ) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(title)
+            .setMessage(message)
+            .setNegativeButton("Cancelar") { dialog, which ->
+                onClickDialog.clickCancel()
+            }
+            .setPositiveButton("Aceptar") { dialog, which ->
+                onClickDialog.clickAccept()
+            }
+            .setCancelable(true)
+            .show()
+    }
+
+    interface OnClickDialog {
+        fun clickAccept()
+        fun clickCancel()
+    }
+
     fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
         supportFragmentManager.beginTransaction().apply {
             replace(frameId, fragment)
