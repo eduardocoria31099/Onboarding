@@ -120,7 +120,25 @@ class ListFragment : Fragment() {
             override fun onCancel() {
                 dialogPersonUpdate.hide()
             }
-            override fun onUpdatePerson() {
+
+            override fun onUpdatePerson(
+                id: Int,
+                img: String,
+                name: String,
+                birthday: String,
+                address: String,
+                number: String,
+                hobbies: String,
+            ) {
+                viewModel.updatePerson(
+                    id = id,
+                    img = img,
+                    name = name,
+                    birthday = birthday,
+                    address = address,
+                    number = number,
+                    hobbies = hobbies,
+                )
             }
         })
         dialogPersonUpdate.show()

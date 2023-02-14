@@ -31,4 +31,13 @@ class ContainerRepository {
             emit(ApiResponseStatus.Error(ex.message ?: ""))
         }
     }.flowOn(Dispatchers.IO)
+
+    fun updatePerson(personEntity: PersonEntity) = flow {
+        emit(ApiResponseStatus.Loading())
+        try {
+            emit(ApiResponseStatus.Success(App.database.personDao().update(personEntity)))
+        } catch (ex: Exception) {
+            emit(ApiResponseStatus.Error(ex.message ?: ""))
+        }
+    }.flowOn(Dispatchers.IO)
 }

@@ -67,6 +67,37 @@ class ContainerViewModel : ViewModel() {
         }
     }
 
+    fun updatePerson(
+        id: Int,
+        img: String,
+        name: String,
+        birthday: String,
+        address: String,
+        number: String,
+        hobbies: String,
+    ) = viewModelScope.launch {
+        repository.updatePerson(
+            PersonEntity(
+                id = id,
+                img = img,
+                name = name,
+                birthday = birthday,
+                address = address,
+                number = number,
+                hobbies = hobbies,
+            )
+        ).collect { response ->
+            when (response) {
+                is ApiResponseStatus.Loading -> {}
+                is ApiResponseStatus.Success -> {
+                    _state.update { it.copy(message = "Person deleted successful") }
+                }
+                is ApiResponseStatus.Error -> {}
+            }
+            resetMessage()
+        }
+    }
+
     fun resetMessage() {
         _state.update { it.copy(message = "") }
     }

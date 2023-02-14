@@ -19,7 +19,6 @@ class DialogPersonUpdate(context: Context, personEntity: PersonEntity) {
         person = personEntity
         val inflater = LayoutInflater.from(context)
         binding = DialogPersonUpdateBinding.inflate(inflater)
-
         val builder = AlertDialog.Builder(context)
         builder.setView(binding.root)
         dialog = builder.create()
@@ -43,6 +42,18 @@ class DialogPersonUpdate(context: Context, personEntity: PersonEntity) {
                     onOptionSelectedListener!!.onCancel()
                 }
             }
+
+            btnAddPeople.setOnClickListener {
+                onOptionSelectedListener!!.onUpdatePerson(
+                    person.id ?: 0,
+                    person.img ?: "",
+                    txtName.text.toString(),
+                    txtBirthdayDay.text.toString(),
+                    txtAddress.text.toString(),
+                    txtPhoneNumber.text.toString(),
+                    txtHobbies.text.toString()
+                )
+            }
         }
     }
 
@@ -52,7 +63,15 @@ class DialogPersonUpdate(context: Context, personEntity: PersonEntity) {
 
     interface OnOptionSelectedListener {
         fun onCancel()
-        fun onUpdatePerson()
+        fun onUpdatePerson(
+            id: Int,
+            img: String,
+            name: String,
+            birthday: String,
+            address: String,
+            number: String,
+            hobbies: String,
+        )
     }
 
     fun show() {

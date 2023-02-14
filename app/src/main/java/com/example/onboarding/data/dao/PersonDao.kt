@@ -1,9 +1,6 @@
 package com.example.onboarding.data.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.onboarding.model.PersonEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -18,4 +15,7 @@ interface PersonDao {
 
     @Delete
     fun delete(personEntity: PersonEntity)
+
+    @Update
+    fun update(personEntity: PersonEntity)
 }
