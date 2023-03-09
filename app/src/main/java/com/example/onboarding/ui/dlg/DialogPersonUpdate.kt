@@ -54,6 +54,9 @@ class DialogPersonUpdate(context: Context, personEntity: PersonEntity) {
                     txtHobbies.text.toString()
                 )
             }
+            btnTakePicture.setOnClickListener {
+                onOptionSelectedListener!!.onTakePicture()
+            }
         }
     }
 
@@ -72,6 +75,8 @@ class DialogPersonUpdate(context: Context, personEntity: PersonEntity) {
             number: String,
             hobbies: String,
         )
+
+        fun onTakePicture()
     }
 
     fun show() {

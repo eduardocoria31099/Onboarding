@@ -60,7 +60,7 @@ class ListFragment : Fragment() {
     }
 
     private fun setFlows() = lifecycleScope.launch {
-        collect(viewModel.inventory) {
+        collect(viewModel.listPerson) {
             listPerson = it
             personAdapter.addAll(it)
             validateCont()
@@ -83,6 +83,7 @@ class ListFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 when (direction) {
                     ItemTouchHelper.LEFT -> {
+                        personAdapter.addAll(listPerson)
                         requireContext().materialAlertDialogWhitClick(
                             "Message",
                             "¿Do you want to delete the person?",
@@ -93,11 +94,12 @@ class ListFragment : Fragment() {
                                 }
 
                                 override fun clickCancel() {
-                                    personAdapter.addAll(listPerson)
+
                                 }
                             })
                     }
                     ItemTouchHelper.RIGHT -> {
+                        personAdapter.addAll(listPerson)
                         val person = personAdapter.getPerson(viewHolder.position)
                         showDialogPersonUpdate(person)
                     }
@@ -119,6 +121,7 @@ class ListFragment : Fragment() {
             DialogPersonUpdate.OnOptionSelectedListener {
             override fun onCancel() {
                 dialogPersonUpdate.hide()
+
             }
 
             override fun onUpdatePerson(
@@ -139,6 +142,11 @@ class ListFragment : Fragment() {
                     number = number,
                     hobbies = hobbies,
                 )
+                dialogPersonUpdate.hide()
+            }
+
+            override fun onTakePicture() {
+
             }
         })
         dialogPersonUpdate.show()

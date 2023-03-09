@@ -14,7 +14,8 @@ import kotlinx.coroutines.launch
 class ContainerViewModel : ViewModel() {
 
     private var repository = ContainerRepository()
-    val inventory: Flow<List<PersonEntity>> get() = repository.getAll()
+
+    val listPerson: Flow<List<PersonEntity>> get() = repository.getAll()
 
     private val _state = MutableStateFlow(UiState())
     val state: StateFlow<UiState> get() = _state
