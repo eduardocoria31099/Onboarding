@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.onboarding.R
 import com.example.onboarding.databinding.FragmentHomeBinding
-import com.example.onboarding.model.PersonEntity
+import com.example.core.model.PersonEntity
 import com.example.onboarding.viewmodel.ContainerViewModel
 import com.example.utils.Constants.REQUEST_IMAGE_CAPTURE
 import com.example.utils.ExtendedFunctions.bitmapToString

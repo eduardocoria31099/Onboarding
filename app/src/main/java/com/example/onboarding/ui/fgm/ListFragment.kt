@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onboarding.databinding.FragmentListBinding
-import com.example.onboarding.model.PersonEntity
+import com.example.core.model.PersonEntity
 import com.example.onboarding.ui.adapter.PersonAdapter
 import com.example.onboarding.ui.adapter.SwipeGesture
 import com.example.onboarding.ui.dlg.DialogPerson

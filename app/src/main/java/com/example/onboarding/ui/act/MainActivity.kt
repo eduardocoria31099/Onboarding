@@ -5,7 +5,7 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.lifecycle.lifecycleScope
-import com.example.onboarding.App.Companion.datastore
+import com.example.core.App.Companion.datastore
 import com.example.onboarding.R
 import com.example.utils.ExtendedFunctions.nextActivity
 import kotlinx.coroutines.Dispatchers

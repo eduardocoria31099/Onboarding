@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.onboarding.model.UserEntity
+import com.example.core.model.UserEntity
 import com.example.onboarding.repository.LoginRepository
 import com.example.utils.ApiResponseStatus
 import com.example.utils.Utils.isValidEmail

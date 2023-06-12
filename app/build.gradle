@@ -86,17 +86,7 @@ dependencies {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     implementation project(":utils")
+    implementation project(":core")
 
 }

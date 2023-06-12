@@ -3,7 +3,7 @@ package com.example.onboarding.ui.act
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.onboarding.App.Companion.datastore
+import com.example.core.App.Companion.datastore
 import com.example.onboarding.R
 import com.example.onboarding.databinding.ActivityLoginBinding
 import com.example.onboarding.ui.fgm.RegisterFragment

@@ -1,7 +1,7 @@
 package com.example.onboarding.repository
 
-import com.example.onboarding.App
-import com.example.onboarding.model.PersonEntity
+import com.example.core.App
+import com.example.core.model.PersonEntity
 import com.example.utils.ApiResponseStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

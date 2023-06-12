@@ -1,8 +1,8 @@
 package com.example.onboarding.repository
 
-import com.example.onboarding.App
-import com.example.onboarding.domain.toDomain
-import com.example.onboarding.model.UserEntity
+import com.example.core.App
+import com.example.core.domain.toDomain
+import com.example.core.model.UserEntity
 import com.example.utils.ApiResponseStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow

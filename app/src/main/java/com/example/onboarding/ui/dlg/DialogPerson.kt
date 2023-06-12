@@ -5,7 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import com.example.onboarding.databinding.DialogPersonBinding
-import com.example.onboarding.model.PersonEntity
+import com.example.core.model.PersonEntity
 import com.example.utils.Utils.birthday
 
 class DialogPerson(context: Context, personEntity: PersonEntity) {

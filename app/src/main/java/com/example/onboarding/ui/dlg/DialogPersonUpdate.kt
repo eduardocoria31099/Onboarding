@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory
 import android.util.Base64
 import android.view.LayoutInflater
 import com.example.onboarding.databinding.DialogPersonUpdateBinding
-import com.example.onboarding.model.PersonEntity
+import com.example.core.model.PersonEntity
 
 class DialogPersonUpdate(context: Context, personEntity: PersonEntity) {
     private var binding: DialogPersonUpdateBinding

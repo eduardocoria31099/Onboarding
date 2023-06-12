@@ -11,7 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onboarding.R
 import com.example.onboarding.databinding.ItemListPeopleBinding
-import com.example.onboarding.model.PersonEntity
+import com.example.core.model.PersonEntity
 import com.example.utils.Utils.birthday
 import java.util.*
 

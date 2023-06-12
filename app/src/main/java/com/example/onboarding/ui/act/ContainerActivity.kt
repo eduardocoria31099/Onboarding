@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.lifecycleScope
-import com.example.onboarding.App.Companion.datastore
+import com.example.core.App.Companion.datastore
 import com.example.onboarding.R
 import com.example.onboarding.databinding.ActivityContainerBinding
 import com.example.onboarding.ui.fgm.HomeFragment

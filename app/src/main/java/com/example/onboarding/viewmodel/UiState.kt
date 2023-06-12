@@ -1,7 +1,7 @@
 package com.example.onboarding.viewmodel
 
-import com.example.onboarding.domain.Result
-import com.example.onboarding.domain.User
+import com.example.core.domain.Result
+import com.example.core.domain.User
 
 data class UiState(
     val loading: Boolean = false,

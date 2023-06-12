@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onboarding.R
 import com.example.onboarding.databinding.ItemCharacterBinding
-import com.example.onboarding.domain.Result
+import com.example.core.domain.Result
 import com.squareup.picasso.Picasso
 
 class CharacterAdapter(

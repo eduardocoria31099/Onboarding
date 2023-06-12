@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.onboarding.databinding.FragmentServiceBinding
-import com.example.onboarding.domain.Result
+import com.example.core.domain.Result
 import com.example.onboarding.ui.adapter.CharacterAdapter
 import com.example.onboarding.viewmodel.CharacterViewModel
 import com.example.utils.ExtendedFunctions.collect

@@ -2,7 +2,7 @@ package com.example.onboarding.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.onboarding.model.PersonEntity
+import com.example.core.model.PersonEntity
 import com.example.onboarding.repository.ContainerRepository
 import com.example.utils.ApiResponseStatus
 import kotlinx.coroutines.flow.Flow
