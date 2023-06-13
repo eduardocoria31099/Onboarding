@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Onboarding</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="v_1_0">v 1.0</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="register_new_account">Register new account</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="home">Home</string>
+    <string name="birthday_day">Birthday Day</string>
+    <string name="address">Address</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="hobbies">Hobbies</string>
+    <string name="add_people">Add People</string>
+    <string name="list_peoples">List Peoples</string>
+    <string name="list_character">List Character</string>
+    <string name="search">Search</string>
+    <string name="no_people_registered">No people registered</string>
+    <string name="list">List</string>
+    <string name="service">Service</string>
+    <string name="message">Message</string>
+    <string name="update_person">update person</string>
+</resources>

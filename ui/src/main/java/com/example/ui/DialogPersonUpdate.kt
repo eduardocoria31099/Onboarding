@@ -1,4 +1,4 @@
-package com.example.onboarding.ui.dlg
+package com.example.ui
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -6,8 +6,8 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.util.Base64
 import android.view.LayoutInflater
-import com.example.onboarding.databinding.DialogPersonUpdateBinding
 import com.example.core.model.PersonEntity
+import com.example.ui.databinding.DialogPersonUpdateBinding
 
 class DialogPersonUpdate(context: Context, personEntity: PersonEntity) {
     private var binding: DialogPersonUpdateBinding

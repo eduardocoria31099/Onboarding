@@ -16,3 +16,4 @@ rootProject.name = "Onboarding"
 include ':app'
 include ':utils'
 include ':core'
+include ':ui'

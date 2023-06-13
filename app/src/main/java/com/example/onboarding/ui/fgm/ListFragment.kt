@@ -10,13 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.onboarding.databinding.FragmentListBinding
 import com.example.core.model.PersonEntity
+import com.example.onboarding.databinding.FragmentListBinding
 import com.example.onboarding.ui.adapter.PersonAdapter
 import com.example.onboarding.ui.adapter.SwipeGesture
-import com.example.onboarding.ui.dlg.DialogPerson
-import com.example.onboarding.ui.dlg.DialogPersonUpdate
 import com.example.onboarding.viewmodel.ContainerViewModel
+import com.example.ui.DialogPerson
 import com.example.utils.ExtendedFunctions
 import com.example.utils.ExtendedFunctions.collect
 import com.example.utils.ExtendedFunctions.gone
@@ -116,9 +115,9 @@ class ListFragment : Fragment() {
 
     private fun showDialogPersonUpdate(person: PersonEntity) {
 
-        val dialogPersonUpdate = DialogPersonUpdate(requireContext(), person)
+        val dialogPersonUpdate = com.example.ui.DialogPersonUpdate(requireContext(), person)
         dialogPersonUpdate.setOnOptionSelectedListener(object :
-            DialogPersonUpdate.OnOptionSelectedListener {
+            com.example.ui.DialogPersonUpdate.OnOptionSelectedListener {
             override fun onCancel() {
                 dialogPersonUpdate.hide()
 
@@ -154,7 +153,8 @@ class ListFragment : Fragment() {
 
     private fun showDialogPerson(person: PersonEntity) {
         val dialogPerson = DialogPerson(requireContext(), person)
-        dialogPerson.setOnOptionSelectedListener(object : DialogPerson.OnOptionSelectedListener {
+        dialogPerson.setOnOptionSelectedListener(object :
+            com.example.ui.DialogPerson.OnOptionSelectedListener {
             override fun onCancelOptionSelected() {
                 dialogPerson.hide()
             }
